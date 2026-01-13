@@ -48,3 +48,19 @@ ls -ltr /redhat/sysgrp
 ### Additional comment:
 
 Even if the user creating file in the directory is **root** it will still have group owner of **sysgrp**.
+
+The setgid (Set Group ID) permission in Unix-like systems changes how file execution and directory group ownership work: on files, it makes programs run with the file's group permissions instead of the user's; on directories, it forces new files/folders created inside to inherit the directory's group, not the user's primary group, which is great for shared team folders. 
+
+On Files (Executable Programs)
+Normal Behavior: A program runs with the privileges of the user who executes it.
+With setgid: The program runs with the privileges of the group that owns the file, not the user.
+Example: If a script is owned by the developers group and has setgid set, anyone running it (even a user not in developers) will have their process run with developers group permissions. 
+
+On Directories (Shared Folders)
+Normal Behavior: Files created in a directory inherit the user's primary group.
+With setgid: Files and subdirectories created within that directory will inherit the group ownership of the parent directory, making collaboration easier.
+Example: In a /shared/project directory set with setgid, if user Alice (primary group alice) creates file1, it will be owned by alice's group; but if user Bob (primary group bob) creates file2, it will belong to the project group, as that's the directory's group, say CertLibrary.com. 
+
+How to Identify
+In ls -l output, a lowercase s appears in the group's execute (x) permission spot (e.g., -rwsr-xr-x), indicating setgid is set. 
+
