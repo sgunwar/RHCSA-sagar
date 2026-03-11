@@ -23,7 +23,7 @@ Hex code (type L to list all hex code): 82
 changed type of partition 'Linux' to 'Linux swap'
 command (m for help): press w to save changes 
 
-[root@localhost ~]# partprobe
+[root@localhost ~]# partprobe [inform the operating system kernel of partition table changes without requiring a reboot]
 [root@localhost ~]# mkswap /dev/sdd1
 [root@localhost ~]# swapon /dev/sdd1
 [root@localhost ~]# swapon -s (check swap summary)
